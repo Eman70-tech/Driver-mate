@@ -1,0 +1,33 @@
+# Python / envs
+__pycache__/
+*.py[cod]
+ai_env/
+.venv/
+venv/
+
+# Data & outer folders
+artifacts/scaler_FordB_mfcc.pkl
+datasets/
+archive/
+outputs/
+figures/
+files/
+first_try/
+load/
+work/
+*.npy
+*.zip
+
+# Internal docs and scratch
+docs/
+*.docx
+*.pdf
+thre.txt
+
+# Secrets / OS / IDE
+.env
+.vscode/
+Thumbs.db
+
+# Keep the tiny files inference needs
+!artifacts/optimal_threshold.npy
