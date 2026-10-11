@@ -1,6 +1,6 @@
-#  Driver-Mate — Ford Engine Sound Classifier
+# Driver-Mate — Ford Engine Sound Classifier
 
-AI-powered acoustic fault detection for Ford engines. Driver-Mate converts engine audio into MFCC "fingerprints", classifies them with a Conv2D deep learning model, and serves predictions through a FastAPI backend designed for a mobile app (Flutter) recording audio on a phone in a real garage.
+AI-powered acoustic fault detection for Ford engines. Driver-Mate converts engine audio into MFCC "fingerprints", classifies them with a Conv2D deep learning model, and serves predictions through a FastAPI backend that powers the Driver-Mate Android app (Flutter), which records engine audio on a phone in a real garage.
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.16-orange)
@@ -9,23 +9,23 @@ AI-powered acoustic fault detection for Ford engines. Driver-Mate converts engin
 
 ---
 
-##  Table of Contents
+## Table of Contents
 
-- [Overview](#-overview)
-- [Mobile App](#-mobile-app)
-- [How It Works](#-how-it-works)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Training Pipeline](#-training-pipeline)
-- [Running the API](#-running-the-api)
-- [Docker](#-docker)
-- [Configuration](#-configuration)
-- [Known Limitations & Roadmap](#-known-limitations--roadmap)
-- [Author](#-author)
+- [Overview](#overview)
+- [Mobile App](#mobile-app)
+- [How It Works](#how-it-works)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Training Pipeline](#training-pipeline)
+- [Running the API](#running-the-api)
+- [Docker](#docker)
+- [Configuration](#configuration)
+- [Known Limitations & Roadmap](#known-limitations--roadmap)
+- [Author](#author)
 
 ---
 
-##  Overview
+## Overview
 
 | | |
 |---|---|
@@ -38,20 +38,20 @@ AI-powered acoustic fault detection for Ford engines. Driver-Mate converts engin
 
 The key design goal: **the training path and the production path are identical**, so the model sees the same feature space on a phone microphone as it did during training.
 
-##  Mobile App
+---
 
-Driver-Mate is deployed as an Android application built with Flutter. The app records a
-5-second engine sample on the phone, uploads it to this FastAPI backend, and displays the
-diagnosis (Healthy / Faulty) to the user.
+## Mobile App
+
+Driver-Mate is deployed as an Android application built with Flutter. The app records a 5-second engine sample on the phone, uploads it to this FastAPI backend, and displays the diagnosis (Healthy / Faulty) to the user.
 
 | Component | Responsibility | Repository |
 |---|---|---|
 | ML model + FastAPI backend | Feature extraction, inference, majority voting | this repo |
-| Flutter mobile app | Audio recording, upload, result display | https://github.com/AhmedAbdelaal345/driver_mate |
+| Flutter mobile app | Audio recording, upload, result display | [AhmedAbdelaal345/driver_mate](https://github.com/AhmedAbdelaal345/driver_mate) |
 
 ---
 
-##  How It Works
+## How It Works
 
 ### Feature extraction
 
@@ -89,7 +89,7 @@ The decision threshold (`0.847`) is deliberately conservative: it favours catchi
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```text
 Driver-mate/
@@ -108,8 +108,8 @@ Driver-mate/
 ├── main_part2.py          # Pipeline stage 2: augmentation
 ├── main_finish.py         # Pipeline stage 3: scaling & final tensors
 ├── run_pipeline.py        # Runs stages 1–3 sequentially
-├── artifacts/             # Model, scaler(s), optimal threshold
-├── docs/                  # Handover guide and reports
+├── artifacts/             # Model, scaler, optimal threshold
+├── HANDOVER_GUIDE.md      # Backend integration guide
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
@@ -117,7 +117,7 @@ Driver-mate/
 
 ---
 
-##  Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -143,11 +143,11 @@ pip install -r requirements.txt
 
 Download the **FordA** and **FordB** datasets from the [UCR Time Series Classification Archive](https://www.timeseriesclassification.com/) and place the `.txt` files in the directory referenced by `DATA_DIR` in `config.py`.
 
-> Raw data and generated `.npy` files are not stored in this repository.
+> Raw data and generated `.npy` files are not stored in this repository. FordA and FordB remain subject to the terms of the UCR archive.
 
 ---
 
-##  Training Pipeline
+## Training Pipeline
 
 Run all three stages in one command:
 
@@ -170,7 +170,7 @@ python evaluate.py
 
 ---
 
-##  Running the API
+## Running the API
 
 ```bash
 uvicorn api:app --host 0.0.0.0 --port 8000 --workers 1
@@ -199,9 +199,11 @@ The response contains the final prediction, a confidence score, and the per-chun
 - WAV format, ideally **5 seconds** long.
 - Shorter recordings are zero-padded; longer ones are cropped.
 
+For backend integration details, see the [Handover Guide](HANDOVER_GUIDE.md).
+
 ---
 
-##  Docker
+## Docker
 
 ```bash
 docker build -t driver-mate .
@@ -212,7 +214,7 @@ Make sure the `artifacts/` folder (model, scaler, threshold) is available to the
 
 ---
 
-##  Configuration
+## Configuration
 
 All parameters live in `config.py`. The following **must be identical between training and production**:
 
@@ -228,9 +230,7 @@ Changing any one of these without retraining will cause silent inference errors.
 
 ---
 
-
-
-##  Known Limitations & Roadmap
+## Known Limitations & Roadmap
 
 - [ ] Add CORS middleware for Flutter web clients
 - [ ] Add rate limiting on `/predict`
@@ -245,7 +245,7 @@ The model is trained on sensor data resampled to 8 kHz, not on raw microphone re
 
 ---
 
-##  Author
+## Author
 
 **Eman** — Computer Science graduate, Zagazig University · Machine Learning & AI Engineering
 
