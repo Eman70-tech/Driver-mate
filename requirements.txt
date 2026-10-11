@@ -1,0 +1,27 @@
+#   Install with:
+#   pip install -r requirements.txt
+
+# Tested on Python 3.10 / 3.11
+
+
+# API framework
+
+fastapi==0.111.0
+uvicorn[standard]==0.29.0      # ASGI server (includes uvloop + httptools)
+python-multipart==0.0.9        # required for FastAPI file uploads
+
+# ML / inference
+
+tensorflow==2.16.1             # must match the version used during training
+numpy==1.26.4
+scikit-learn==1.4.2            # for StandardScaler (joblib-serialised)
+joblib==1.4.2
+
+# Audio processing
+
+librosa==0.10.2.post1
+soundfile==0.12.1              # WAV I/O backend used by librosa
+
+# Utilities
+
+pydantic==2.7.1                # FastAPI data validation (v2 is default in 0.111)
