@@ -12,6 +12,7 @@ AI-powered acoustic fault detection for Ford engines. Driver-Mate converts engin
 ##  Table of Contents
 
 - [Overview](#-overview)
+- [Mobile App](#-mobile-app)
 - [How It Works](#-how-it-works)
 - [Project Structure](#-project-structure)
 - [Getting Started](#-getting-started)
@@ -19,7 +20,6 @@ AI-powered acoustic fault detection for Ford engines. Driver-Mate converts engin
 - [Running the API](#-running-the-api)
 - [Docker](#-docker)
 - [Configuration](#-configuration)
-- [Results](#-results)
 - [Known Limitations & Roadmap](#-known-limitations--roadmap)
 - [Author](#-author)
 
