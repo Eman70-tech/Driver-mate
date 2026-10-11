@@ -38,7 +38,7 @@ AI-powered acoustic fault detection for Ford engines. Driver-Mate converts engin
 
 The key design goal: **the training path and the production path are identical**, so the model sees the same feature space on a phone microphone as it did during training.
 
-## 📱 Mobile App
+##  Mobile App
 
 Driver-Mate is deployed as an Android application built with Flutter. The app records a
 5-second engine sample on the phone, uploads it to this FastAPI backend, and displays the
@@ -245,7 +245,7 @@ The model is trained on sensor data resampled to 8 kHz, not on raw microphone re
 
 ---
 
-## 👩‍💻 Author
+##  Author
 
 **Eman** — Computer Science graduate, Zagazig University · Machine Learning & AI Engineering
 
